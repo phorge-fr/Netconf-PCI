@@ -128,3 +128,12 @@ resource "routeros_ip_firewall_filter" "rule" {
   tls_host               = lookup(each.value, "tls_host", null)
   ttl                    = lookup(each.value, "ttl", null)
 }
+
+resource "routeros_ip_firewall_addr_list" "list" {
+  for_each = { for list in var.firewall_address_lists : list.list => list }
+
+  list        = each.value.list
+  address     = each.value.address
+  comment     = lookup(each.value, "comment", null)
+  disabled    = lookup(each.value, "disabled", false)
+}

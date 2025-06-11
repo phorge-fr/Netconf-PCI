@@ -149,3 +149,13 @@ variable "firewall_rules" {
   }))
   default = []
 }
+
+variable "firewall_address_lists" {
+  description = "List of address lists"
+  type = list(object({
+    list    = string
+    address = string
+    comment = optional(string, "tofu;;;")
+  }))
+  default = []
+}
