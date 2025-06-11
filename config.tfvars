@@ -38,3 +38,8 @@ firewall_address_lists = [
   { list = "ControlPlane LoadBalancer IPs", address = "10.0.0.10-10.0.0.20"},
   { list = "ControlPlane API Server", address = "10.0.0.4"},
 ]
+
+firewall_nat_rules = [
+  { chain = "dstnat", action = "dst-nat", protocol = "tcp", dst_port = "80", to_addresses = "10.0.0.10", to_ports = "80", in_interface_list = "WAN", comment = "tofu;;; Redirect HTTP to ControlPlane LB Nginx" },
+  { chain = "dstnat", action = "dst-nat", protocol = "tcp", dst_port = "443", to_addresses = "10.0.0.10", to_ports = "443", in_interface_list = "WAN", comment = "tofu;;; Redirect HTTPS to ControlPlane LB Nginx" },
+]

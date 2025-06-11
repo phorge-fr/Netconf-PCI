@@ -159,3 +159,19 @@ variable "firewall_address_lists" {
   }))
   default = []
 }
+
+variable "firewall_nat_rules" {
+  description = "List of NAT rules"
+  type = list(object({
+    action            = string
+    chain             = string
+    out_interface      = optional(string)
+    in_interface_list = optional(string)
+    to_addresses        = optional(string)
+    to_ports           = optional(string)
+    protocol          = optional(string)
+    dst_port          = optional(string)
+    comment           = optional(string, "tofu;;;")
+  }))
+  default = []
+}
