@@ -1,11 +1,18 @@
 vlans = [
   { interface = "bridge", name = "Office", vlan_id = 10 },
-  { interface = "bridge", name = "ControlPlane", vlan_id = 20 }
+  { interface = "bridge", name = "ControlPlane", vlan_id = 20 },
+  { interface = "bridge", name = "IaaS-NS", vlan_id = 30 },
+  { interface = "bridge", name = "IaaS-EW", vlan_id = 40 },
+  { interface = "bridge", name = "HPC", vlan_id = 50 },
+
 ]
 
 ip_addresses = [
   { interface = "Office", address = "192.168.3.254/24"},
   { interface = "ControlPlane", address = "10.0.0.254/24" },
+  { interface = "IaaS-NS", address = "10.0.1.254/24" },
+  { interface = "IaaS-EW", address = "10.0.2.254/24" },
+  { interface = "HPC", address = "10.0.3.254/24" },
 ]
 
 ip_pools = [
