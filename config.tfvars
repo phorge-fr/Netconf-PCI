@@ -35,6 +35,8 @@ dns_records = [
   { name = "iaas0.phorge", address = "10.0.1.1", type = "A" },
   { name = "iaas1.phorge", address = "10.0.1.2", type = "A" },
   { name = "iaas2.phorge", address = "10.0.1.3", type = "A" },
+  { name = "hpc-gpu.phorge", address = "10.0.3.1", type = "A" },
+  { name = "hpc-npu.phorge", address = "10.0.3.2", type = "A" },
 ]
 
 firewall_rules = [
@@ -53,4 +55,19 @@ firewall_address_lists = [
 firewall_nat_rules = [
   { chain = "dstnat", action = "dst-nat", protocol = "tcp", dst_port = "80", to_addresses = "10.0.0.10", to_ports = "80", in_interface_list = "WAN", comment = "tofu;;; Redirect HTTP to ControlPlane LB Nginx" },
   { chain = "dstnat", action = "dst-nat", protocol = "tcp", dst_port = "443", to_addresses = "10.0.0.10", to_ports = "443", in_interface_list = "WAN", comment = "tofu;;; Redirect HTTPS to ControlPlane LB Nginx" },
+]
+
+interface_lists = [ 
+  { name = "PCI"},
+  # { name = "ControlPlane Nodes" },
+  # { name = "IaaS NS" },
+  # { name = "IaaS EW" },
+  # { name = "HPC Nodes" },
+]
+
+interface_list_members = [
+  { interface_list = "PCI", interface = "ControlPlane" },
+  { interface_list = "PCI", interface = "IaaS-NS" },
+  { interface_list = "PCI", interface = "IaaS-EW" },
+  { interface_list = "PCI", interface = "HPC" },
 ]
