@@ -205,3 +205,22 @@ resource "routeros_ip_firewall_nat" "rule" {
   to_ports               = lookup(each.value, "to_ports", null)
   ttl                    = lookup(each.value, "ttl", null)
 }
+
+resource "routeros_interface_list" "list" {
+  for_each = { for list in var.interface_lists : list.name => list }
+
+  name        = each.value.name
+  comment     = lookup(each.value, "comment", null)
+}
+
+resource "routeros_interface_list_member" "member" {
+  for_each = { for member in var.interface_list_members : "${member.interface_list}-${member.interface}" => member }
+
+  list       = each.value.interface_list
+  interface  = each.value.interface
+  comment    = lookup(each.value, "comment", null)
+
+  depends_on = [
+    routeros_interface_list.list
+  ]
+}

@@ -175,3 +175,22 @@ variable "firewall_nat_rules" {
   }))
   default = []
 }
+
+variable "interface_lists" {
+  description = "List of interface lists"
+  type = list(object({
+    name    = string
+    comment = optional(string, "tofu;;;")
+  }))
+  default = []
+}
+
+variable "interface_list_members" {
+  description = "List of interface list members"
+  type = list(object({
+    interface_list = string
+    interface      = string
+    comment        = optional(string, "tofu;;;")
+  }))
+  default = []
+}
