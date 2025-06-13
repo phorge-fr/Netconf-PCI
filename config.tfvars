@@ -32,6 +32,9 @@ dns_records = [
   { name = "cp-pi4-1.phorge", address = "10.0.0.2", type = "A" },
   { name = "cp-pi4-2.phorge", address = "10.0.0.3", type = "A" },
   { name = "cp-api_server.phorge", address = "10.0.0.4", type = "A" },
+  { name = "iaas0.phorge", address = "10.0.1.1", type = "A" },
+  { name = "iaas1.phorge", address = "10.0.1.2", type = "A" },
+  { name = "iaas2.phorge", address = "10.0.1.3", type = "A" },
 ]
 
 firewall_rules = [
@@ -44,6 +47,7 @@ firewall_address_lists = [
   { list = "ControlPlane Nodes", address = "10.0.0.1-10.0.0.3" },
   { list = "ControlPlane LoadBalancer IPs", address = "10.0.0.10-10.0.0.20"},
   { list = "ControlPlane API Server", address = "10.0.0.4"},
+  { list = "IaaS Nodes", address = "10.0.1.1-10.0.1.3" },
 ]
 
 firewall_nat_rules = [
