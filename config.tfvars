@@ -55,6 +55,7 @@ firewall_address_lists = [
 firewall_nat_rules = [
   { chain = "dstnat", action = "dst-nat", protocol = "tcp", dst_port = "80", to_addresses = "10.0.0.10", to_ports = "80", in_interface_list = "WAN", comment = "tofu;;; Redirect HTTP to ControlPlane LB Nginx" },
   { chain = "dstnat", action = "dst-nat", protocol = "tcp", dst_port = "443", to_addresses = "10.0.0.10", to_ports = "443", in_interface_list = "WAN", comment = "tofu;;; Redirect HTTPS to ControlPlane LB Nginx" },
+  { chain = "dstnat", action = "dst-nat", protocol = "udp", dst_port = "9", to_addresses = "10.0.3.253", dst_address="10.0.3.0/24", comment = "tofu;;; Allow WoL from other networks to HPC" }, # Requires to manually create a static ARP entry such as: 10.0.3.253 -> ff:ff:ff:ff:ff:ff
 ]
 
 interface_lists = [ 
